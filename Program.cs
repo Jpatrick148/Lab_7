@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,22 +12,22 @@ namespace Lab_7
     {
         static void Main(string[] args)
         {
-            //UserName();
-            //IsValidEmail();
+            UserName();
+            Email();
             PhoneNumber();
-            
+            Date();
 
-
+            Console.WriteLine("All of your Information was entered correctly. GLHF");
             Console.ReadLine();
         }
 
-        public static string UserName()
+        public static void UserName()
         {
             bool check;
 
             Console.WriteLine("Please enter a name. Please capitalize");
-            string input = Console.ReadLine();           
-            
+            string input = Console.ReadLine();
+
             for (int i = 0; i < input.Length; i++)
             {
                 if (Regex.IsMatch(input, @"^[A-Z][a-zA-Z\s]{1,30}$"))
@@ -43,46 +44,57 @@ namespace Lab_7
                     Console.WriteLine("Please enter a Valid Name.");
                     input = Console.ReadLine();
                 }
-            }
-            return input;
+            }           
         }
 
 
 
-        public static bool Email()
+        public static void Email()
         {
-            Console.WriteLine("Please Enter an Email Address.");
-            // Return true if strIn is in valid e-mail format.
-            string test = Console.ReadLine();
-            bool check = Regex.IsMatch(test,@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
-            if (check == false)
+            bool check;
+            do
             {
-                Console.WriteLine("Oops I'm Sorry Email is Invalid. Try Again.");
-                Email();
-            }
-            return check;
+                Console.WriteLine("Please Enter an Email Address.");
+                // Return true if strIn is in valid e-mail format.
+                string test = Console.ReadLine();
+                check = Regex.IsMatch(test,
+                    @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            } while (!check);
         }
 
-        public static bool PhoneNumber()
+        public static void PhoneNumber()
         {
-            Console.WriteLine("Please Enter A Phone number");
-            string test = Console.ReadLine();
-            bool check = Regex.IsMatch(test, @"^(\+\d[0-9]{1,8})$");
-            if (check == false)
+            bool check;
+            do
             {
-                Console.WriteLine("Oops I'm Sorry, the phone number is invalid.");
-                PhoneNumber();
-            }
-            return check;
+                Console.Write("Please Enter A Phone number: ");
+                string test = Console.ReadLine();
+                check = Regex.IsMatch(test, @"^\d{10}$");
+                if (!check)
+                {
+                    Console.WriteLine("Ooops");
+                }
+
+            } while (!check);
         }
 
-        public static bool Date()
+
+
+        public static void Date()
         {
-            Console.WriteLine("Please enter a date. mm/dd/yyyy");
-            DateTime test = Console.ReadLine();
             
-            bool check = DateTime.TryParseExact(test);
-    
+            bool check;
+            do
+            {
+                DateTime dt;
+                Console.WriteLine("Please enter a date. mm/dd/yyyy.");
+                check = DateTime.TryParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out dt);
+                if (!check)
+                {
+                    Console.WriteLine("Incorrect Format, Please try again.");
+                }
+            } while (!check);
         }
 
     }
