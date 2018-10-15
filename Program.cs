@@ -11,8 +11,8 @@ namespace Lab_7
     {
         static void Main(string[] args)
         {
-            //UserName();
-            IsValidEmail();
+            UserName();
+            //IsValidEmail();
             
 
 
@@ -21,14 +21,14 @@ namespace Lab_7
 
         public static string UserName()
         {
-            bool check = false;
+            bool check;
 
             Console.WriteLine("Please enter a name. Please capitalize");
-            string input = Console.ReadLine();
-
+            string input = Console.ReadLine();           
+            
             for (int i = 0; i < input.Length; i++)
             {
-                if (Regex.IsMatch(input, @"^[a-zA-Z\s]+$"))
+                if (Regex.IsMatch(input, @"^[A-Z][a-zA-Z\s]{1,30}$"))
                 {
                     check = true;
                 }
@@ -36,6 +36,7 @@ namespace Lab_7
                 {
                     check = false;
                 }
+
                 if (check == false)
                 {
                     Console.WriteLine("Please enter a Valid Name.");
@@ -45,14 +46,22 @@ namespace Lab_7
             return input;
         }
 
-        public static bool IsValidEmail(string strIn)
+
+
+        public static bool IsValidEmail()
         {
             Console.WriteLine("Please Enter an Email Address.");
             // Return true if strIn is in valid e-mail format.
             string test = Console.ReadLine();
-            
-            return Regex.IsMatch(test, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            bool check = Regex.IsMatch(test,@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            if (check == false)
+            {
+                Console.WriteLine("Oops I'm Sorry Email is Invalid. Try Again.");
+                IsValidEmail();
+            }
+            return check;
         }
+
 
         
 
