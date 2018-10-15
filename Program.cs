@@ -11,8 +11,9 @@ namespace Lab_7
     {
         static void Main(string[] args)
         {
-            UserName();
+            //UserName();
             //IsValidEmail();
+            PhoneNumber();
             
 
 
@@ -48,7 +49,7 @@ namespace Lab_7
 
 
 
-        public static bool IsValidEmail()
+        public static bool Email()
         {
             Console.WriteLine("Please Enter an Email Address.");
             // Return true if strIn is in valid e-mail format.
@@ -57,14 +58,32 @@ namespace Lab_7
             if (check == false)
             {
                 Console.WriteLine("Oops I'm Sorry Email is Invalid. Try Again.");
-                IsValidEmail();
+                Email();
             }
             return check;
         }
 
+        public static bool PhoneNumber()
+        {
+            Console.WriteLine("Please Enter A Phone number");
+            string test = Console.ReadLine();
+            bool check = Regex.IsMatch(test, @"^(\+\d[0-9]{1,8})$");
+            if (check == false)
+            {
+                Console.WriteLine("Oops I'm Sorry, the phone number is invalid.");
+                PhoneNumber();
+            }
+            return check;
+        }
 
-        
-
+        public static bool Date()
+        {
+            Console.WriteLine("Please enter a date. mm/dd/yyyy");
+            DateTime test = Console.ReadLine();
+            
+            bool check = DateTime.TryParseExact(test);
+    
+        }
 
     }
 }
