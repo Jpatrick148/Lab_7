@@ -12,9 +12,9 @@ namespace Lab_7
     {
         static void Main(string[] args)
         {
-            //UserName();
-            //Email();
-            //PhoneNumber();
+            UserName();
+            Email();
+            PhoneNumber();
             Date();
 
             Console.WriteLine("All of your Information was entered correctly. GLHF");
