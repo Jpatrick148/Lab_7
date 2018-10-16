@@ -12,9 +12,9 @@ namespace Lab_7
     {
         static void Main(string[] args)
         {
-            UserName();
-            Email();
-            PhoneNumber();
+            //UserName();
+            //Email();
+            //PhoneNumber();
             Date();
 
             Console.WriteLine("All of your Information was entered correctly. GLHF");
@@ -69,7 +69,7 @@ namespace Lab_7
             {
                 Console.Write("Please Enter A Phone number: ");
                 string test = Console.ReadLine();
-                check = Regex.IsMatch(test, @"^\d{10}$");
+                check = Regex.IsMatch(test, @"^[1-9]\d{2}-\d{3}-\d{4}");
                 if (!check)
                 {
                     Console.WriteLine("Ooops");
@@ -87,8 +87,8 @@ namespace Lab_7
             do
             {
                 DateTime dt;
-                Console.WriteLine("Please enter a date. mm/dd/yyyy.");
-                check = DateTime.TryParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture,
+                Console.WriteLine("Please enter a date. dd/mm/yyyy.");
+                check = DateTime.TryParseExact(Console.ReadLine(), "dd/mm/yyyy", CultureInfo.InvariantCulture,
                     DateTimeStyles.None, out dt);
                 if (!check)
                 {
